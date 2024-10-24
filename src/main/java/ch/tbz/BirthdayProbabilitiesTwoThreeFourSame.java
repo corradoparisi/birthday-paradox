@@ -1,15 +1,8 @@
 package ch.tbz;
 
-import org.knowm.xchart.*;
-import org.knowm.xchart.style.Styler;
-import org.knowm.xchart.style.markers.SeriesMarkers;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-public class BirthdayParadoxTwoThreeFourSamePlot {
+public class BirthdayProbabilitiesTwoThreeFourSame {
 
     private static final int DAYS_IN_YEAR = 365;
     private static final int SIMULATIONS = 10000; // Number of simulations for each group size
@@ -18,13 +11,7 @@ public class BirthdayParadoxTwoThreeFourSamePlot {
         // Array of different group sizes
         int[] groupSizes = {1, 5, 10, 20, 23, 30, 40, 50, 60, 70, 75, 100};
 
-        // Lists to store results for plotting
-        List<Integer> groupSizeList = new ArrayList<>();
-        List<Double> probTwoSameList = new ArrayList<>();
-        List<Double> probThreeSameList = new ArrayList<>();
-        List<Double> probFourSameList = new ArrayList<>();
-
-        // Run simulations for each group size and store the results
+        // Run simulations for each group size and output the results
         for (int numberOfPeople : groupSizes) {
             int twoSame = 0;
             int threeSame = 0;
@@ -41,18 +28,10 @@ public class BirthdayParadoxTwoThreeFourSamePlot {
             double probThreeSame = calculateProbability(SIMULATIONS, threeSame);
             double probFourSame = calculateProbability(SIMULATIONS, fourSame);
 
-            groupSizeList.add(numberOfPeople);
-            probTwoSameList.add(probTwoSame);
-            probThreeSameList.add(probThreeSame);
-            probFourSameList.add(probFourSame);
-
             // Output the results, formatted clearly
             System.out.printf("People: %d\t\tTwo Same: %.1f%%\t\tThree Same: %.1f%%\t\tFour Same: %.1f%%%n",
                     numberOfPeople, probTwoSame, probThreeSame, probFourSame);
         }
-
-        // Plot the results
-        plotGraph(groupSizeList, probTwoSameList, probThreeSameList, probFourSameList);
     }
 
     /**
@@ -92,27 +71,4 @@ public class BirthdayParadoxTwoThreeFourSamePlot {
     private static double calculateProbability(int simulations, int matches) {
         return (double) matches / simulations * 100;
     }
-
-    /**
-     * Plots the graph using XChart
-     */
-    private static void plotGraph(List<Integer> groupSizes, List<Double> probTwoSame, List<Double> probThreeSame, List<Double> probFourSame) {
-        // Create a Chart
-        XYChart chart = new XYChartBuilder().width(800).height(600).title("Birthday Paradox Probabilities").xAxisTitle("Number of People").yAxisTitle("Probability (%)").build();
-
-        // Customize the chart
-        chart.getStyler().setChartTitleVisible(true);
-        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNE);
-        chart.getStyler().setMarkerSize(8);
-
-        // Add data series
-        chart.addSeries("Two Same Birthdays", groupSizes, probTwoSame);
-        chart.addSeries("Three Same Birthdays", groupSizes, probThreeSame);
-        chart.addSeries("Four Same Birthdays", groupSizes, probFourSame);
-
-        // Show it
-        new SwingWrapper<>(chart).displayChart();
-    }
-
-
 }
