@@ -10,16 +10,12 @@ public class ParisisProbabilitiesChart {
 
     public static void main(String[] args) {
         // Hardcoded data based on the graph
-        double[] groupSizes = {5, 10, 15, 20, 25, 30, 35, 40,
-                               45, 50, 55, 60, 65, 70, 75, 80,
-                               85, 90, 95, 100};
-        double[] probabilities = {3, 11, 25, 40, 58, 70, 80, 88,
-                                  92, 94, 96, 97, 98, 99, 99.5,
-                99.7, 99.8, 100, 100, 100};
+        double[] groupSizes = {10,20,23,30,40,50,60};
+        double[] probabilities = {12,41,51,71,89,97,99};
 
         // Create a Chart
         XYChart chart = new XYChartBuilder().width(800).height(600)
-                .title("Parisis Probabilities")
+                .title("Parisis Theory of Probabilities")
                 .xAxisTitle("Number of People")
                 .yAxisTitle("Probability (%)").build();
 
