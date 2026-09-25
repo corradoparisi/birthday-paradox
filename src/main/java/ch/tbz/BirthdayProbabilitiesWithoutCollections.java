@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class BirthdayProbabilitiesWithoutCollections {
 
+    private static final Random RANDOM = new Random(); // Reuse one generator instead of creating a new one per simulation
     public static void main(String[] args) {
         // Number of simulations
         int simulations = 1000;
@@ -27,11 +28,10 @@ public class BirthdayProbabilitiesWithoutCollections {
     private static boolean hasBirthdayMatch(int numberOfPeople) {
         // Array to track whether a specific birthday has already been assigned
         boolean[] birthdays = new boolean[365];
-        Random random = new Random();
 
         for (int i = 0; i < numberOfPeople; i++) {
             // Random birthday between 0 and 364 (365 days in a year)
-            int birthday = random.nextInt(365);
+            int birthday = RANDOM.nextInt(365);
 
             // If this birthday was already assigned, we have a match
             if (birthdays[birthday]) {

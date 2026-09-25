@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class BirthdayProbabilitiesWithHashSetBeginners {
 
+    private static final Random RANDOM = new Random(); // Reuse one generator instead of creating a new one per simulation
     public static void main(String[] args) {
         // Number of simulations
         int simulations = 1000;
@@ -27,11 +28,10 @@ public class BirthdayProbabilitiesWithHashSetBeginners {
     // Method to check if there is a birthday match in a group
     private static boolean hasBirthdayMatch(int numberOfPeople) {
         HashSet<Integer> birthdays = new HashSet<>();
-        Random random = new Random();
 
         for (int i = 0; i < numberOfPeople; i++) {
             // Random birthday between 0 and 364 (365 days in a year)
-            int birthday = random.nextInt(365);
+            int birthday = RANDOM.nextInt(365);
 
             // If the birthday is already in the HashSet, we have a match
             if (birthdays.contains(birthday)) {

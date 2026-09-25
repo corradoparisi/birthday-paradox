@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class BirthdayProbabilitiesPlotWithoutCollections {
 
+    private static final Random RANDOM = new Random(); // Reuse one generator instead of creating a new one per simulation
     private static final int DAYS_IN_YEAR = 365;
     private static final int SIMULATIONS = 10000; // Number of simulations for each group size
 
@@ -70,10 +71,9 @@ public class BirthdayProbabilitiesPlotWithoutCollections {
      */
     private static boolean hasMatchingBirthday(int numberOfPeople) {
         boolean[] birthdays = new boolean[DAYS_IN_YEAR]; // Boolean array instead of HashSet
-        Random random = new Random();
 
         for (int i = 0; i < numberOfPeople; i++) {
-            int birthday = random.nextInt(DAYS_IN_YEAR);  // Random birthday between 0 and 364
+            int birthday = RANDOM.nextInt(DAYS_IN_YEAR);  // Random birthday between 0 and 364
 
             if (birthdays[birthday]) {
                 return true;  // Birthday is already marked as true, so we have a match
