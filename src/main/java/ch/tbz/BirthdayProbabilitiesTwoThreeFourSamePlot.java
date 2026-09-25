@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class BirthdayProbabilitiesTwoThreeFourSamePlot {
 
+    private static final Random RANDOM = new Random(); // Reuse one generator instead of creating a new one per simulation
     private static final int DAYS_IN_YEAR = 365;
     private static final int SIMULATIONS = 10000; // Number of simulations for each group size
 
@@ -62,11 +63,10 @@ public class BirthdayProbabilitiesTwoThreeFourSamePlot {
     private static int[] runSingleSimulation(int numberOfPeople) {
         int[] birthdayCounts = new int[DAYS_IN_YEAR]; // Array to track how many people share each birthday
         int[] result = {0, 0, 0};  // {twoSame, threeSame, fourSame}
-        Random random = new Random();
 
         // Assign random birthdays to the group
         for (int i = 0; i < numberOfPeople; i++) {
-            int birthday = random.nextInt(DAYS_IN_YEAR);  // Random birthday between 0 and 364
+            int birthday = RANDOM.nextInt(DAYS_IN_YEAR);  // Random birthday between 0 and 364
             birthdayCounts[birthday]++; // Increment the count for that specific birthday
         }
 
